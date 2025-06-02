@@ -73,8 +73,3 @@ elif page == "About":
 
 
 
-sdjbfhsndfks
-sndbjhbsjdkf
-jshdbjs
-scaledjhsbdjksd
-ksndk
