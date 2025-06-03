@@ -4,7 +4,6 @@ import streamlit as st
 import pickle
 import re
 from PIL import Image
-import base64
 st.set_page_config(page_title="Credit Score Status", layout="wide")
 from streamlit_option_menu import option_menu
 
@@ -63,7 +62,47 @@ elif page == "Prediction":
       st.image(bad_zone)
 elif page == "About":
     st.title("About")
-    st.write("This app was developed to demonstrate multi-page navigation.")
+    st.subheader('📌 About the Project')
+    st.write("This application predicts Credit Score Status (Good, Standard, or Bad) based on multiple financial indicators provided by the user. It aims to help individuals or financial institutions assess the creditworthiness of a user quickly and efficiently using a machine learning model.")
+    st.subheader('🧾 Dataset Details')
+    st.write('The dataset used in this project was sourced from Kaggle.')
+    st.write('Link: https://www.kaggle.com/datasets/parisrohan/credit-score-classification')
+    st.write('Before training the model, the dataset underwent preprocessing steps including:')
+    st.markdown("""
+    - Handled missing values by dropping and filling.
+    - Encoding categorical variables (e.g., payment of minimum amount)
+    - Scaling numerical features to ensure consistency
+    - Feature selection to improve model performance""")
+    st.subheader('🔍 Features Considered')
+    st.markdown("""
+    - Annual Income  
+    - Number of Bank Accounts  
+    - Number of Credit Cards  
+    - Interest Rate  
+    - Number of Loans  
+    - Delay from Due Date  
+    - Number of Delayed Payments  
+    - Changed Credit Limit  
+    - Outstanding Debt  
+    - Credit History Age  
+    - Payment of Minimum Amount(Yes/No)""")
+    st.write("These features represent common financial behaviors and account management practices that impact a person's credit status.")
+    st.subheader('🧠 Model Information')
+    st.write('The model was trained using:')
+    st.markdown("""
+    - Algorithm: Random Forest Classifier
+    - Libraries: pandas, numpy, scikit-learn, streamlit, regular expression(re), pickle.
+    - Accuracy: **96.37%** on the test dataset""")
+    st.write('The model was trained and tested in a Jupyter Notebook environment and deployed using Streamlit for interactive web access.')
+    st.subheader('✅ Why This Matters')
+    st.write('Understanding your credit score status can:')
+    st.markdown("""
+    - Help you qualify for loans and credit cards
+    - Unlock better interest rates
+    - Improve your financial planning""")
+    st.write('By using this app, users can get an instant evaluation of their credit score status and take informed steps to improve it.')
+    st.subheader('⚠️ Disclaimer')
+    st.write('This tool is for educational and demonstration purposes only. The predictions should not be used as a substitute for official credit reports from financial institutions or agencies.')
 
 # samples
 # Bad - [[19300.340,6,7,17,5,51,18,9.95,2430.21,226,1],[81093.160,10,7,17,7,29,20,15.72,4523.30,123,1]]
