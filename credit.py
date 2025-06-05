@@ -7,6 +7,14 @@ from PIL import Image
 st.set_page_config(page_title="Credit Score Status", layout="wide")
 from streamlit_option_menu import option_menu
 
+st.markdown("""
+    <style>
+    html {
+        scroll-behavior: smooth;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 with st.sidebar:
     page = option_menu(
         "Navigation",
@@ -17,9 +25,29 @@ with st.sidebar:
     )
 
 if page == "Home":
-  st.title("🔹 Welcome to CrediVision: Your Trusted Credit Score Status Prediction Platform")
-  home_page=Image.open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\home page.png')
-  st.image(home_page)
+  st.title('🏠 Welcome to CreditStatus AI App')
+  st.write('An intelligent web app designed to predict your credit score status based on your financial profile. Get instant, personalized feedback powered by machine learning to help you make smarter financial decisions.')
+  st.markdown("""
+  ### ✨ Key Features:
+  - 🔍 Predict credit score status as **Good**, **Standard**, or **Bad**
+  - 📊 Easy-to-use input interface
+  - ⚡ Instant prediction results with visual feedback
+  - 🧠 Powered by a 96% accurate machine learning model
+  - 🌐 Deployed using Streamlit for seamless web access""")
+  st.markdown("""
+  ### 🛠️ How It Works:
+  1. Go to the **Prediction** page
+  2. Enter your financial information
+  3. Click on **Predict**
+  4. Get your **Credit Score Status** instantly""")
+  from streamlit_lottie import st_lottie
+  import json
+  with open("credit_animation.json", "r") as f:
+    lottie_data = json.load(f)
+  st_lottie(lottie_data, speed=1, height=300, key="credit")
+
+  home_page=Image.open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\homepage2.png')
+  st.image(home_page, caption="Your Credit Score Guide in a Snapshot")
 elif page == "Prediction":
   with open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\credit.pkl','rb') as obj2:
     dict1 = pickle.load(obj2)
@@ -103,12 +131,10 @@ elif page == "About":
     st.write('By using this app, users can get an instant evaluation of their credit score status and take informed steps to improve it.')
     st.subheader('⚠️ Disclaimer')
     st.write('This tool is for educational and demonstration purposes only. The predictions should not be used as a substitute for official credit reports from financial institutions or agencies.')
-
+    st.subheader('🧑‍💻 Behind the scene')
+    st.write("For detailed reference and access to the complete source code, please visit the GitHub repository linked below.")
+    st.markdown("[🐙 Credit score project](https://github.com/Anson369/Credit-card-status-prediction)")
 # samples
 # Bad - [[19300.340,6,7,17,5,51,18,9.95,2430.21,226,1],[81093.160,10,7,17,7,29,20,15.72,4523.30,123,1]]
 # Standard - [[33751.27,5,5,20,3,16,19,11,1328.93,238,1],[25546.26,8,7,14,5,16,15,1.83,758.44,229,1]]
 # Good - [[143162.64,1,5,8,3,6,3,2.1,1303.01,222,0],[30689.89,2,5,4,1,5,6,1.99,632.46,217,0]]
-
-
-
-
