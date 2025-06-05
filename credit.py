@@ -3,7 +3,9 @@ import numpy as np
 import streamlit as st
 import pickle
 import re
-from PIL import Image
+from PIL import Image,ImageDraw,ImageFont
+from streamlit_lottie import st_lottie
+import json
 st.set_page_config(page_title="Credit Score Status", layout="wide")
 from streamlit_option_menu import option_menu
 
@@ -25,29 +27,31 @@ with st.sidebar:
     )
 
 if page == "Home":
-  st.title('🏠 Welcome to CreditStatus AI App')
-  st.write('An intelligent web app designed to predict your credit score status based on your financial profile. Get instant, personalized feedback powered by machine learning to help you make smarter financial decisions.')
   st.markdown("""
-  ### ✨ Key Features:
-  - 🔍 Predict credit score status as **Good**, **Standard**, or **Bad**
-  - 📊 Easy-to-use input interface
-  - ⚡ Instant prediction results with visual feedback
-  - 🧠 Powered by a 96% accurate machine learning model
-  - 🌐 Deployed using Streamlit for seamless web access""")
-  st.markdown("""
-  ### 🛠️ How It Works:
-  1. Go to the **Prediction** page
-  2. Enter your financial information
-  3. Click on **Predict**
-  4. Get your **Credit Score Status** instantly""")
-  from streamlit_lottie import st_lottie
-  import json
-  with open("credit_animation.json", "r") as f:
-    lottie_data = json.load(f)
-  st_lottie(lottie_data, speed=1, height=300, key="credit")
-
-  home_page=Image.open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\homepage2.png')
-  st.image(home_page, caption="Your Credit Score Guide in a Snapshot")
+    <div style="text-align:center; padding-bottom:60px;">
+        <h1>🏠 Welcome to CreditStatus AI App</h1>
+    </div>""", unsafe_allow_html=True)
+  col1, col2 = st.columns(2)
+  with col1:
+    with open("credit_animation.json", "r") as f:
+      lottie_data = json.load(f)
+    st_lottie(lottie_data, speed=1, height=500, key="credit")
+  with col2:
+    st.write('An intelligent web app designed to predict your credit score status based on your financial profile. Get instant, personalized feedback powered by machine learning to help you make smarter financial decisions.')
+    st.markdown("""
+    ### ✨ Key Features:
+    - 🔍 Predict credit score status as **Good**, **Standard**, or **Bad**
+    - 📊 Easy-to-use input interface
+    - ⚡ Instant prediction results with visual feedback
+    - 🧠 Powered by a 96% accurate machine learning model
+    - 🌐 Deployed using Streamlit for seamless web access""")
+    st.markdown("""
+    ### 🛠️ How It Works:
+    1. Go to the **Prediction** page
+    2. Enter your financial information
+    3. Click on **Predict**
+    4. Get your **Credit Score Status** instantly""")
+    
 elif page == "Prediction":
   with open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\credit.pkl','rb') as obj2:
     dict1 = pickle.load(obj2)
