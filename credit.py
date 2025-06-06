@@ -6,7 +6,7 @@ import re
 from PIL import Image,ImageDraw,ImageFont
 from streamlit_lottie import st_lottie
 import json
-st.set_page_config(page_title="Credit Score Status", layout="wide")
+st.set_page_config(page_title="Credit Score Status", layout="wide",page_icon=r"C:\Users\anson\Downloads\speedometer.png")
 from streamlit_option_menu import option_menu
 
 st.markdown("""
