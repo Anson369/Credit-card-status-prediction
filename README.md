@@ -26,7 +26,7 @@ Google Colab (for development and experimentation)
 **📂 How to Run Locally**
 
 - Clone the repository:
-git clone https://github.com/your-username/credit-score-prediction.git
+git clone https://github.com/your-username/credit-score-prediction.git,
 cd credit-score-prediction
 
 - Run the Streamlit app:
