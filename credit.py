@@ -3,7 +3,7 @@ import numpy as np
 import streamlit as st
 import pickle
 import re
-from PIL import Image,ImageDraw,ImageFont
+from PIL import Image
 from streamlit_lottie import st_lottie
 import json
 st.set_page_config(page_title="Credit Score Status", layout="wide",page_icon=r"C:\Users\anson\Downloads\speedometer.png")
@@ -84,13 +84,13 @@ elif page == "Prediction":
     good_zone=Image.open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\good_zone.png').resize((350,350))
     standard_zone=Image.open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\stndard_zone.png').resize((350,350))
     if result_label=='Good':
-      st.success("🎉 Your credit score is GOOD. You're eligible for better credit offers and lower interest rates.")
+      st.success("🎉 Your credit score is GOOD(700-850). You're eligible for better credit offers and lower interest rates.")
       st.image(good_zone)
     elif result_label=='Standard':
-      st.warning("⚠️ Your score is STANDARD. Try to reduce debt and pay bills on time to boost it.")
+      st.warning("⚠️ Your score is STANDARD(600-699). Try to reduce debt and pay bills on time to boost it.")
       st.image(standard_zone)
     else:
-      st.error("🚨 Your credit score is BAD. You may face challenges in loan approvals or interest rates.")
+      st.error("🚨 Your credit score is BAD(300-599). You may face challenges in loan approvals or interest rates.")
       st.image(bad_zone)
 elif page == "About":
     st.title("About")
