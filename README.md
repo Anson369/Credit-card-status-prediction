@@ -8,7 +8,7 @@ Exploratory Data Analysis (EDA): Visualized trends and relationships using Seabo
 
 Feature Selection: Applied Recursive Feature Elimination (RFE) to select the most impactful features.
 
-Model Training: Trained a Random Forest Classifier with hyperparameter tuning to achieve a test accuracy of 96.37%.
+Model Training: Trained a Random Forest Classifier with hyperparameter tuning to achieve a test accuracy of 96.43%.
 
 Deployment: Used pickle to save the trained model and deployed it on a Streamlit-based web app for real-time predictions.
 
