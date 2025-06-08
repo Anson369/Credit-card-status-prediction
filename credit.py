@@ -57,7 +57,6 @@ elif page == "Prediction":
     dict1 = pickle.load(obj2)
   st.title("Credit Score Status Prediction")
   st.write("Upload your data and get predictions.")
-  Annual_Income=st.number_input('💰Annual Income',5000.0,30000000.0,step=0.01)
   Num_Bank_Accounts=st.selectbox("🏦Number of bank accounts",range(1,11))
   Num_Credit_Card=st.selectbox('💳Number of credit cards',range(1,11))
   Interest_Rate=st.number_input('％✨Interest rate',1.0,35.0,step=0.1)
@@ -76,7 +75,7 @@ elif page == "Prediction":
   Payment_of_Min_Amount=dict1['Payment_of_Min_Amount'].transform([Payment_of_Min_Amount])[0]
   button=st.button('🤖Predict')
   if button:
-    data=[[Annual_Income,Num_Bank_Accounts,Num_Credit_Card,Interest_Rate,Num_of_Loan,Delay_from_due_date,Num_of_Delayed_Payment,Changed_Credit_Limit,Outstanding_Debt,Credit_History_Age,Payment_of_Min_Amount]]
+    data=[[Num_Bank_Accounts,Num_Credit_Card,Interest_Rate,Num_of_Loan,Delay_from_due_date,Num_of_Delayed_Payment,Changed_Credit_Limit,Outstanding_Debt,Credit_History_Age,Payment_of_Min_Amount]]
     scaled=dict1['scaler'].transform(data)
     res=dict1['model'].predict(scaled)
     result_label=dict1['output'].inverse_transform([res])[0][0]
@@ -106,8 +105,7 @@ elif page == "About":
     - Scaling numerical features to ensure consistency
     - Feature selection to improve model performance""")
     st.subheader('🔍 Features Considered')
-    st.markdown("""
-    - Annual Income  
+    st.markdown(""" 
     - Number of Bank Accounts  
     - Number of Credit Cards  
     - Interest Rate  
@@ -124,7 +122,7 @@ elif page == "About":
     st.markdown("""
     - Algorithm: Random Forest Classifier
     - Libraries: pandas, numpy, scikit-learn, streamlit, regular expression(re), pickle.
-    - Accuracy: **96.37%** on the test dataset""")
+    - Accuracy: **96.43%** on the test dataset""")
     st.write('The model was trained and tested in a Jupyter Notebook environment and deployed using Streamlit for interactive web access.')
     st.subheader('✅ Why This Matters')
     st.write('Understanding your credit score status can:')
@@ -139,6 +137,6 @@ elif page == "About":
     st.write("For detailed reference and access to the complete source code, please visit the GitHub repository linked below.")
     st.markdown("[🐙 Credit score project](https://github.com/Anson369/Credit-card-status-prediction)")
 # samples
-# Bad - [[19300.340,6,7,17,5,51,18,9.95,2430.21,226,1],[81093.160,10,7,17,7,29,20,15.72,4523.30,123,1]]
-# Standard - [[33751.27,5,5,20,3,16,19,11,1328.93,238,1],[25546.26,8,7,14,5,16,15,1.83,758.44,229,1]]
-# Good - [[143162.64,1,5,8,3,6,3,2.1,1303.01,222,0],[30689.89,2,5,4,1,5,6,1.99,632.46,217,0]]
+# Bad - [[6,7,17,5,51,18,9.95,2430.21,226(18y and 10m),1],[10,7,17,7,29,20,15.72,4523.30,123(12y and 3m),1]]
+# Standard - [[5,5,20,3,16,19,11,1328.93,238(19y and 10m),1],[8,7,14,5,16,15,1.83,758.44,229(19y and 1m),1]]
+# Good - [[1,5,8,3,6,3,2.1,1303.01,222(18y and 6m),0],[2,5,4,1,5,6,1.99,632.46,217(18y and 1m),0]]
