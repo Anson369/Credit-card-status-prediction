@@ -14,6 +14,21 @@ st.markdown("""
     html {
         scroll-behavior: smooth;
     }
+    * {
+        font-size: 20px !important;
+    }
+    h1 {
+        font-size: 44px !important;
+    }
+    h2 {
+        font-size: 34px !important;
+    }
+    h3 {
+        font-size: 36px !important;
+    }
+    .stButton>button {
+        font-size: 18px !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -53,44 +68,59 @@ if page == "Home":
     4. Get your **Credit Score Status** instantly""")
     
 elif page == "Prediction":
-  with open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\credit.pkl','rb') as obj2:
-    dict1 = pickle.load(obj2)
-  st.title("Credit Score Status Prediction")
-  st.write("Upload your data and get predictions.")
-  Num_Bank_Accounts=st.selectbox("🏦Number of bank accounts",range(1,11))
-  Num_Credit_Card=st.selectbox('💳Number of credit cards',range(1,11))
-  Interest_Rate=st.number_input('％✨Interest rate',1.0,35.0,step=0.1)
-  Num_of_Loan=st.select_slider('📄Number of loans',range(1,11))
-  Delay_from_due_date=st.number_input('📅⚠️Due date delay',1,70,help='Represents the number of days delayed from the payment date')
-  Num_of_Delayed_Payment=st.number_input('💸🚨Number of delayed payment',0,30)
-  Changed_Credit_Limit=st.number_input('🔁Changed credit limit',-7.0,37.0,step=0.01,help='Represents the percentage change in credit card limit')
-  Outstanding_Debt=st.number_input('💰❗Outstanding debt',10.0,5000.0,help='Represents the remaining debt to be paid')
-  Credit_History_Age=st.text_input('🗓️Credit history age',placeholder='e.g., 2 years 6 months')
-  year_match=re.search(r'(\d+)\s*[yY]ears?',Credit_History_Age)
-  month_match=re.search(r'(\d+)\s*[mM]onths?',Credit_History_Age)
-  years=int(year_match.group(1)) if year_match else 0
-  months=int(month_match.group(1)) if month_match else 0
-  Credit_History_Age=(12*years)+months
-  Payment_of_Min_Amount=st.selectbox('✅ / ❌Mininum amount paid or not', ['Yes', 'No'])
-  Payment_of_Min_Amount=dict1['Payment_of_Min_Amount'].transform([Payment_of_Min_Amount])[0]
-  button=st.button('🤖Predict')
-  if button:
-    data=[[Num_Bank_Accounts,Num_Credit_Card,Interest_Rate,Num_of_Loan,Delay_from_due_date,Num_of_Delayed_Payment,Changed_Credit_Limit,Outstanding_Debt,Credit_History_Age,Payment_of_Min_Amount]]
-    scaled=dict1['scaler'].transform(data)
-    res=dict1['model'].predict(scaled)
-    result_label=dict1['output'].inverse_transform([res])[0][0]
-    bad_zone=Image.open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\bad_zone.png').resize((350,350))
-    good_zone=Image.open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\good_zone.png').resize((350,350))
-    standard_zone=Image.open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\stndard_zone.png').resize((350,350))
-    if result_label=='Good':
-      st.success("🎉 Your credit score is GOOD(700-850). You're eligible for better credit offers and lower interest rates.")
-      st.image(good_zone)
-    elif result_label=='Standard':
-      st.warning("⚠️ Your score is STANDARD(600-699). Try to reduce debt and pay bills on time to boost it.")
-      st.image(standard_zone)
-    else:
-      st.error("🚨 Your credit score is BAD(300-599). You may face challenges in loan approvals or interest rates.")
-      st.image(bad_zone)
+  col1,col2,col3 = st.columns([1,2,1])
+  with col2:
+    with open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\credit.pkl','rb') as obj2:
+      dict1 = pickle.load(obj2)
+    st.title("Credit Score Status Prediction")
+    home_page_image=Image.open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\homepage2.png').resize((768,512))
+    st.image(home_page_image)
+    st.write("Upload your data and get predictions.")
+    Num_Bank_Accounts=st.selectbox("🏦Number of bank accounts",range(1,11))
+    Num_Credit_Card=st.selectbox('💳Number of credit cards',range(1,11))
+    Interest_Rate=st.number_input('％✨Interest rate',1.0,35.0,step=0.1)
+    Num_of_Loan=st.select_slider('📄Number of loans',range(1,11))
+    Delay_from_due_date=st.number_input('📅⚠️Due date delay',1,70,help='Represents the number of days delayed from the payment date')
+    Num_of_Delayed_Payment=st.number_input('💸🚨Number of delayed payment',0,30)
+    Changed_Credit_Limit=st.number_input('🔁Changed credit limit',-7.0,37.0,step=0.01,help='Represents the percentage change in credit card limit')
+    Outstanding_Debt=st.number_input('💰❗Outstanding debt',10.0,5000.0,help='Represents the remaining debt to be paid')
+    Credit_History_Age=st.text_input('🗓️Credit history age',placeholder='e.g., 2 years 6 months')
+    year_match=re.search(r'(\d+)\s*[yY]ears?',Credit_History_Age)
+    month_match=re.search(r'(\d+)\s*[mM]onths?',Credit_History_Age)
+    years=int(year_match.group(1)) if year_match else 0
+    months=int(month_match.group(1)) if month_match else 0
+    Credit_History_Age=(12*years)+months
+    Payment_of_Min_Amount=st.selectbox('✅ / ❌Mininum amount paid or not', ['Yes', 'No'])
+    Payment_of_Min_Amount=dict1['Payment_of_Min_Amount'].transform([Payment_of_Min_Amount])[0]
+    col1,col2,col3=st.columns([2,1,2])
+    with col2:
+      button=st.button('🤖Predict')
+    if button:
+      data=[[Num_Bank_Accounts,Num_Credit_Card,Interest_Rate,Num_of_Loan,Delay_from_due_date,Num_of_Delayed_Payment,Changed_Credit_Limit,Outstanding_Debt,Credit_History_Age,Payment_of_Min_Amount]]
+      scaled=dict1['scaler'].transform(data)
+      res=dict1['model'].predict(scaled)
+      result_label=dict1['output'].inverse_transform([res])[0][0]
+      bad_zone=Image.open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\bad_zone.png').resize((350,350))
+      good_zone=Image.open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\good_zone.png').resize((350,350))
+      standard_zone=Image.open(r'C:\Users\anson\OneDrive\Desktop\Machine Learning\ML project datasets\credit score\stndard_zone.png').resize((350,350))
+      if result_label=='Good':
+        col1,col2=st.columns([1,1])
+        with col1:
+          st.image(good_zone)
+        with col2:
+          st.success("🎉 **Your credit score is GOOD(700-850). You're eligible for better credit offers and lower interest rates.**")
+      elif result_label=='Standard':
+        col1,col2=st.columns([1,1])
+        with col1:
+          st.image(standard_zone)
+        with col2:
+          st.warning("⚠️ **Your score is STANDARD(600-699). Try to reduce debt and pay bills on time to boost it.**")
+      else:
+        col1,col2=st.columns([1,1])
+        with col1:
+          st.image(bad_zone)
+        with col2:
+          st.error("🚨 **Your credit score is BAD(300-599). You may face challenges in loan approvals or interest rates.**")
 elif page == "About":
     st.title("About")
     st.subheader('📌 About the Project')
